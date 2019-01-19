@@ -1,0 +1,6 @@
+framework module Pods_RecipeChef {
+  umbrella header "Pods-RecipeChef-umbrella.h"
+
+  export *
+  module * { export * }
+}
