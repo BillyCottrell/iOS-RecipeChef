@@ -9,5 +9,5 @@
 import Foundation
 
 struct Constants {
-    static let baseurl = "https://teaplanet-webshop.firebaseio.com/"
+    static let baseurl = "https://recipe-chef-7c24f.firebaseio.com/"
 }

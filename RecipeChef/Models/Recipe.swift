@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Recept {
+struct Recipe : Codable {
     var name: String
     var description: String
     var servings: Int
@@ -16,17 +16,17 @@ class Recept {
     var preparationTime: Int
     var preparationMethod: [String]
     var image: String
-    var views: Int
-    var id: String
-    init(name:String,description:String,servings:Int, ingredients:[Ingredient], preparationTime:Int,preparationMethod:[String],image:String,views:Int?, id:String?){
-        self.name = name
-        self.description = description
-        self.servings = servings
-        self.ingredients = ingredients
-        self.preparationTime = preparationTime
-        self.preparationMethod = preparationMethod
-        self.image = image
-        self.views = views ?? 0
-        self.id = id ?? ""
+    var views: Int?
+    var id: String?
+    enum CodingKeys: String, CodingKey{
+        case name
+        case description
+        case servings
+        case ingredients
+        case preparationTime
+        case preparationMethod
+        case image
+        case views
+        case id
     }
 }

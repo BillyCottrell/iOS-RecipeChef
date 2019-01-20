@@ -8,17 +8,17 @@
 
 import Foundation
 
-class Ingredient {
+struct Ingredient : Codable{
     var ingredientName: String
     var category: String
-    var quantity: String
-    var measurement: String
-    var notes: String
-    init(ingredientName: String,category:String, quantity:String?, measurement:String?, notes:String?){
-        self.ingredientName = ingredientName
-        self.category = category
-        self.quantity = quantity ?? ""
-        self.measurement = measurement ?? ""
-        self.notes = notes ?? ""
+    var quantity: String?
+    var measurement: String?
+    var notes: String?
+    enum CodingKeys: String, CodingKey {
+        case ingredientName
+        case category
+        case quantity
+        case measurement
+        case notes
     }
 }

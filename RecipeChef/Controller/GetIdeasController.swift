@@ -14,12 +14,13 @@ class GetIdeasController: UITableViewController {
     
     var recipeRef : DatabaseReference!
     var recipeHandle : DatabaseHandle!
-    var recipes:[Recept]!
+    var recipes = [Recipe]()
+    var selectedRecipe : Recipe?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // activate firebase
-        FirebaseApp.configure()
+        //fetchRecipes()
         //recipeRef  = Database.database().reference()
         /*recipeHandle = recipeRef.child("recipes").observe(.childAdded, with: { (snapshot) in
             let recipeDict = snapshot.value as? String
@@ -32,15 +33,39 @@ class GetIdeasController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchRecipes()
+    }
+    
     func fetchRecipes(){
-        recipeRef = Database.database().reference()
+        self.recipes.removeAll()
+        recipeRef = Database.database().reference(fromURL: Constants.baseurl)
         recipeHandle = recipeRef?.child("recipes").observe(.childAdded, with: { (snapshot) in
-            let cat = snapshot.value as? String
-            print(cat!)
-            /*if let categorie = cat {
-                self.recipes.append(categorie)
-                self.tableView.reloadData()
-            }*/
+            let value = snapshot.value as? NSDictionary
+            guard let name = value?["name"] as? String else {return}
+            guard let description = value?["description"] as? String else {return}
+            guard let servings = value?["servings"] as? Int else {return}
+            var ingredients : [Ingredient] = []
+            for ing in value?["ingredients"] as! [NSDictionary] {
+                guard let ingredientName = ing["ingredientName"] as? String else {return}
+                guard let category = ing["category"] as? String else {return}
+                guard let quantity = ing["quantity"] as? String else {return}
+                guard let measurement = ing["measurement"] as? String else {return}
+                guard let notes = ing["notes"] as? String else {return}
+                let ingredient = Ingredient(ingredientName: ingredientName, category: category, quantity: quantity, measurement: measurement, notes: notes)
+                ingredients.append(ingredient)
+            }
+            guard let preparationTime = value?["preparationTime"] as? Int else {return}
+            guard let preparationMethod = value?["preparationMethod"] as? [String] else {return}
+            guard let image = value?["image"] as? String else {return}
+            guard let views = value?["views"] as? Int? else {return}
+            guard let id = value?["id"] as? String? else {return}
+            
+            let recipe = Recipe(name: name,description: description, servings: servings, ingredients: ingredients, preparationTime: preparationTime, preparationMethod: preparationMethod, image: image, views: views, id: id)
+            self.recipes.append(recipe)
+            self.tableView.reloadData()
+            print(self.recipes[0].name)
         })
     }
 
@@ -48,23 +73,42 @@ class GetIdeasController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return recipes.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 210
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
+        
+        configure(cell: cell, forItemAt: indexPath)
+        //cell.imageView?.setNeedsLayout()
+        
         return cell
     }
- 
+    
+    
+    func configure(cell: UITableViewCell, forItemAt indexPath: IndexPath) {
+        let recipe = recipes[indexPath.row]
+        cell.imageView?.downloaded(from: recipe.image, cell: cell)
+        //(from: recipe.image, cell: cell)
+        cell.setNeedsLayout()
+        cell.textLabel?.text = recipe.name
+    }
+    
+    /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRecipe = recipes[indexPath.row]
+        //prepare(for: , sender: <#T##Any?#>: "RecipeDetailSegue", sender: self)
+        //destinationVC.recipe = selectedRecipe
+    }*/
 
     /*
     // Override to support conditional editing of the table view.
@@ -100,14 +144,16 @@ class GetIdeasController: UITableViewController {
         return true
     }
     */
-
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "RecipeDetailSegue" {
+            let recipeDetailController = segue.destination as! RecipeDetailController
+            let index = tableView.indexPathForSelectedRow!.row
+            recipeDetailController.recipe = recipes[index]
+        }
     }
     
 
