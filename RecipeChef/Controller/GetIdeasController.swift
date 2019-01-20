@@ -80,10 +80,6 @@ class GetIdeasController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return recipes.count
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 210
-    }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
