@@ -40,6 +40,6 @@ or preparationMethods can be shown yet.
 
 Billy Cottrell – https://github.com/BillyCottrell
 
-Distributed under the MIT license. See LICENSE for more information.
+Distributed under the MIT license. See ``LICENSE`` for more information.
 
 https://github.com/BillyCottrell/iOS-RecipeChef
