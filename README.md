@@ -8,7 +8,7 @@
 [![Firebase Analytics](https://img.shields.io/badge/Firebase%20Analytics-5.3.0-blue.svg)](https://firebase.google.com)  
 [![Platform](https://img.shields.io/badge/platform-ios-lightgrey.svg)](https://cocoapods.org)
 
-I made this app for a school project. It is a iOS variant of my android app
+This is an iOS variant of my android app
 [Recipe-Chef](https://github.com/BillyCottrell/Recipe-Chef).
 You can't really add recipes yet but in the future it will be made possible.
 At this moment you can look in the list for recipes choose a recipe and view its details but no ingredients
