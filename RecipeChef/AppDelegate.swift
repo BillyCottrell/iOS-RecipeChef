@@ -17,7 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // setup firebase
         FirebaseApp.configure()
+        // build window of device
+        window = UIWindow(frame: UIScreen.main.bounds)
+        // show that window
+        window?.makeKeyAndVisible()
+        // make the layout
+        let layout = UICollectionViewFlowLayout()
+        // add the layout as the root controller
+        window?.rootViewController = UINavigationController(rootViewController: GetIdeasController(collectionViewLayout: layout))
+        // change appearance of the navigation bar to dark red
+        UINavigationBar.appearance().barTintColor = UIColor.rgb(red: 193, green: 67, blue: 72)
+        // when adding a second bar underneath a shadow shows up in between
+        // this code removes the shadow
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        // create the status bar on top
+        let statusBarBackgroundView = UIView()
+        // and sets the color to dark red (darker then the nav bar)
+        statusBarBackgroundView.backgroundColor = UIColor.rgb(red: 161, green: 67, blue: 72)
+        // this overwrites the previous bar with the one we made
+        window?.addSubview(statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "V:|[v0(20)]|", views: statusBarBackgroundView)
         return true
     }
 
