@@ -3,13 +3,13 @@
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 03/08/2019.
-//  Copyright © 2019 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class MenuCell: BaseCell{
+class MenuCell: BaseCollectionViewCell{
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named:"idea")?.withRenderingMode(.alwaysTemplate)

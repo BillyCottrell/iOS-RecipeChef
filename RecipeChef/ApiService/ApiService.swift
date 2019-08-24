@@ -3,7 +3,7 @@
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 09/08/2019.
-//  Copyright © 2019 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import UIKit
@@ -34,7 +34,7 @@ class ApiService: NSObject {
             guard let preparationTime = value?["preparationTime"] as? Int else {return}
             guard let preparationMethod = value?["preparationMethod"] as? [String] else {return}
             guard let image = value?["image"] as? String else {return}
-            guard let views = value?["views"] as? Int? else {return}
+            guard let views = value?["views"] as? Int else {return}
             guard let id = value?["id"] as? String? else {return}
             let recipe = Recipe(name: name,description: description, servings: servings, ingredients: ingredients, preparationTime: preparationTime, preparationMethod: preparationMethod, image: image, views: views, id: id)
             recipes.append(recipe)
@@ -42,7 +42,7 @@ class ApiService: NSObject {
             DispatchQueue.main.async {
                 completion(recipes)
             }
-            print(recipes[0].name)
+            //print(recipes[0].name)
         }, withCancel: nil)
     }
     

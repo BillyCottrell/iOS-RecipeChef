@@ -1,15 +1,15 @@
 //
-//  BaseCell.swift
+//  BaseCollectionViewCell.swift
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 03/08/2019.
-//  Copyright © 2019 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class BaseCell: UICollectionViewCell{
+class BaseCollectionViewCell: UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()

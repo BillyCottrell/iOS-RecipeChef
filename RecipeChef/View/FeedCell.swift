@@ -3,12 +3,14 @@
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 09/08/2019.
-//  Copyright © 2019 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
-class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class FeedCell: BaseCollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -19,14 +21,16 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         return cv
     }()
     
-    let cellId = "cellId"
+    let cellId = "feedcellId"
     
     var recipes = [Recipe]()
     
+    var getIdeasController: GetIdeasController?
+    
     func fetchRecipes(){
         ApiService.sharedInstance.fetchRecipes { (recipes: [Recipe]) in
-            print("this happens once")
-            print(recipes)
+            //print("this happens once")
+            //print(recipes)
             self.recipes = recipes
             self.collectionView.reloadData()
         }
@@ -40,7 +44,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
         
-        collectionView.register(GetIdeasCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: cellId)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -48,7 +52,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // returns the cell based on the index
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! GetIdeasCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! RecipeCell
         cell.recipe = recipes[indexPath.item]
         return cell
     }
@@ -62,6 +66,17 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         return 0
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recipeLauncher = RecipeLauncher()
+        recipes[indexPath.item].views = recipes[indexPath.item].views + 1
+        recipeLauncher.recipe = recipes[indexPath.item]
+        recipeLauncher.getIdeasController = getIdeasController
+        recipeLauncher.showRecipe()
+        let ref = Database.database().reference ().child("recipes").child(recipeLauncher.recipe!.id!)
+        var recipeUpdates = [String:Any]()
+        recipeUpdates["views"] = recipeLauncher.recipe?.views
+        ref.updateChildValues(recipeUpdates)
+    }
     
     
 }

@@ -1,15 +1,15 @@
 //
-//  GetIdeasCell.swift
+//  RecipeCell.swift
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 16/07/2019.
-//  Copyright © 2019 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class GetIdeasCell: BaseCell {
+class RecipeCell: BaseCollectionViewCell {
     
     var recipe: Recipe? {
         didSet {
@@ -32,7 +32,7 @@ class GetIdeasCell: BaseCell {
     
     let recipeNameTextView: UILabel = {
         let label = UILabel()
-        label.text = "First Recipe i made whooo, hopefully this works like it should"
+        //label.text = "First Recipe i made whooo, hopefully this works like it should"
         //label.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
         label.textColor = UIColor.white
         //label.padding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)

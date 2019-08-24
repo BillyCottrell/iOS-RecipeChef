@@ -3,16 +3,14 @@
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 04/02/2019.
-//  Copyright © 2019 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import UIKit
 
-private let reuseIdentifier = "GetIdeasCell"
-
 class GetIdeasController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var cellId = "cellId"
+    var getIdeasCellId = "getIdeasCellId"
     var myRecipesCellId = "myRecipesCellId"
     
     let titles = ["Get Ideas", "My Recipes", "Use Up Leftovers"]
@@ -50,8 +48,8 @@ class GetIdeasController: UICollectionViewController, UICollectionViewDelegateFl
         // sets the background of the collectionview
         collectionView?.backgroundColor = UIColor.white
         // registers the cell for the collectionview with a certain identifier
-        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
-        
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: getIdeasCellId)
+        collectionView?.register(MyRecipesCell.self, forCellWithReuseIdentifier: myRecipesCellId)
         //moves the collectionview below the menubar
         collectionView?.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         //moves the scrollbar below the menubar
@@ -119,18 +117,55 @@ class GetIdeasController: UICollectionViewController, UICollectionViewDelegateFl
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        return cell
+        let identifier: String
+        if indexPath.item == 0{
+            identifier = getIdeasCellId
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FeedCell
+            cell.getIdeasController = self
+            return cell
+        } else if indexPath.item == 1{
+            identifier = myRecipesCellId
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MyRecipesCell
+            cell.getIdeasController = self
+            return cell
+        } else {
+            identifier = getIdeasCellId
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FeedCell
+            cell.getIdeasController = self
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: view.frame.height - 50)
     }
     
+    var statusBarIsHidden: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 0.5) { () -> Void in
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
+        }
+    }
+    
+    func hideStatusBar(hidden: Bool) {
+        statusBarIsHidden = hidden
+        print("status bar should be hidden")
+    }
     // sets the bar style status
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        print(statusBarIsHidden)
+        return statusBarIsHidden
+    }
+    
 }
 /*
 class GetIdeasController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {

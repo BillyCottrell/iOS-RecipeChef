@@ -3,7 +3,7 @@
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 03/08/2019.
-//  Copyright © 2019 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import Foundation

@@ -3,7 +3,7 @@
 //  RecipeChef
 //
 //  Created by Billy Cottrell on 04/12/2018.
-//  Copyright © 2018 Billy Cottrell. All rights reserved.
+//  Copyright © 2018-2019 Codexive. All rights reserved.
 //
 
 import Foundation
@@ -16,7 +16,7 @@ struct Recipe : Codable {
     var preparationTime: Int
     var preparationMethod: [String]
     var image: String
-    var views: Int?
+    var views: Int
     var id: String?
     enum CodingKeys: String, CodingKey{
         case name
