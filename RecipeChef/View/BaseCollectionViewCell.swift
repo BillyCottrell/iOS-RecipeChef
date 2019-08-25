@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// this is used so init doesn't show up in every cell
 class BaseCollectionViewCell: UICollectionViewCell{
     override init(frame: CGRect) {
         super.init(frame: frame)

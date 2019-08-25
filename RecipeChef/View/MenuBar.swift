@@ -11,6 +11,7 @@ import UIKit
 
 class MenuBar: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    // collectionView of navigation items
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -19,10 +20,11 @@ class MenuBar: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataS
         cv.delegate = self
         return cv
     }()
-    
+    // cellid for menucell
     let cellId = "menuCell"
+    // image names for navigation items
     let imageNames = ["get ideas", "my recipes", "use up leftovers"]
-    
+    // the parent controller to scroll to the correct cell
     var getIdeasController: GetIdeasController?
     
     override init(frame: CGRect) {
@@ -33,15 +35,16 @@ class MenuBar: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataS
         addSubview(collectionView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
-        
+        // select the standard item
         let selectedIndexPath = NSIndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath as IndexPath, animated: false, scrollPosition: [])
-        
+        // makes the horizontal bar
         setupHorizontalBar()
     }
     
+    // used for horizontal bar
     var horizontalBarViewAnchorContraint: NSLayoutConstraint?
-    
+    // creates the horizontal bar underneath the navigation items
     func setupHorizontalBar(){
         let horizontalBarView = UIView()
         horizontalBarView.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -59,8 +62,8 @@ class MenuBar: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // when a navigation item is pressed scroll the collectionview to that position
         getIdeasController?.scrollToMenuIndex(menuIndex: indexPath.item)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -68,6 +71,7 @@ class MenuBar: UIView, UICollectionViewDelegateFlowLayout, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // sets the navigation item cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         cell.imageView.image = UIImage(named: imageNames[indexPath.item])?.withRenderingMode(.alwaysTemplate)
         cell.tintColor = UIColor.rgb(red: 91, green: 14, blue: 13)

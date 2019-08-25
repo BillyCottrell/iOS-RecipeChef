@@ -12,6 +12,7 @@ import FirebaseDatabase
 
 class FeedCell: BaseCollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    // this contains all recipes
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -21,16 +22,18 @@ class FeedCell: BaseCollectionViewCell, UICollectionViewDataSource, UICollection
         return cv
     }()
     
+    // recipe cell id for the collectionview
     let cellId = "feedcellId"
     
+    // list of recipes
     var recipes = [Recipe]()
     
+    // parent controller for statusbar updates
     var getIdeasController: GetIdeasController?
     
+    // fetches the recipes and reloads the data async
     func fetchRecipes(){
         ApiService.sharedInstance.fetchRecipes { (recipes: [Recipe]) in
-            //print("this happens once")
-            //print(recipes)
             self.recipes = recipes
             self.collectionView.reloadData()
         }
@@ -38,12 +41,12 @@ class FeedCell: BaseCollectionViewCell, UICollectionViewDataSource, UICollection
     
     override func setupViews() {
         super.setupViews()
+        // fetches all recipes
         fetchRecipes()
-        backgroundColor = .blue
+        // ads the collectionview
         addSubview(collectionView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
-        
         collectionView.register(RecipeCell.self, forCellWithReuseIdentifier: cellId)
     }
     
@@ -67,11 +70,16 @@ class FeedCell: BaseCollectionViewCell, UICollectionViewDataSource, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // when a recipe is selected creates the launcher
         let recipeLauncher = RecipeLauncher()
+        // passes the recipe to the launcher
         recipes[indexPath.item].views = recipes[indexPath.item].views + 1
         recipeLauncher.recipe = recipes[indexPath.item]
+        // sets the controller
         recipeLauncher.getIdeasController = getIdeasController
+        // shows the recipe details
         recipeLauncher.showRecipe()
+        // updates the recipe view property 
         let ref = Database.database().reference ().child("recipes").child(recipeLauncher.recipe!.id!)
         var recipeUpdates = [String:Any]()
         recipeUpdates["views"] = recipeLauncher.recipe?.views

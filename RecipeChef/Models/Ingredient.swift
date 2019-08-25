@@ -8,6 +8,7 @@
 
 import Foundation
 
+// ingredient is a codable object with an enum of codingKeys which is needed when working with firebase
 struct Ingredient : Codable{
     var ingredientName: String
     var category: String

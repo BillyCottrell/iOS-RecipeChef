@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class MenuCell: BaseCollectionViewCell{
+    // contains the image of the navigationItem
     let imageView: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named:"idea")?.withRenderingMode(.alwaysTemplate)
@@ -17,12 +18,14 @@ class MenuCell: BaseCollectionViewCell{
         return iv
     }()
     
+    // styles the image when highlighted
     override var isHighlighted: Bool{
         didSet{
             imageView.tintColor = isHighlighted ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
         }
     }
 
+    // styles the image when selected
     override var isSelected: Bool{
         didSet{
             imageView.tintColor = isSelected ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)

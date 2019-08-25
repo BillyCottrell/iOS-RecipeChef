@@ -9,20 +9,19 @@
 import Foundation
 import UIKit
 
+
 class RecipeCell: BaseCollectionViewCell {
     
     var recipe: Recipe? {
         didSet {
+            //when recipe has been set, set the textViews text and download the recipe image
             recipeNameTextView.text = recipe?.name
             if let recipeImage = recipe?.image {
                 thumbnailImageView.downloaded(from: recipeImage)
             }
         }
     }
-    
-    //@IBOutlet weak var recipeimg: UIImageView!
-    //@IBOutlet weak var recipelbl: UILabel!
-    
+    // The recipe image view
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -30,24 +29,16 @@ class RecipeCell: BaseCollectionViewCell {
         return imageView
     }()
     
+    // Text view for recipe name
     let recipeNameTextView: UILabel = {
         let label = UILabel()
-        //label.text = "First Recipe i made whooo, hopefully this works like it should"
-        //label.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
         label.textColor = UIColor.white
-        //label.padding = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         label.adjustsFontForContentSizeCategory = true
         label.numberOfLines = 0
         return label
     }()
-    /*let recipeLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.4)
-        label.textColor = UIColor.white
-        label.text = "First Recipe i made whooo"
-        return label
-    }()*/
     
+    // view as separator between cells
     let separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.rgb(red: 230, green: 230, blue: 230)
@@ -56,6 +47,7 @@ class RecipeCell: BaseCollectionViewCell {
     
     override func setupViews(){
         super.setupViews()
+        // create recipe name view as a container for the recipe name text view so it covers the bottom of the recipe image
         let recipeNameView = UIView()
         recipeNameView.addSubview(recipeNameTextView)
         recipeNameView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)

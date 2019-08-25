@@ -8,6 +8,7 @@
 
 import Foundation
 
+// recipe is a codable object with an enum of codingKeys which is needed when working with firebase
 struct Recipe : Codable {
     var name: String
     var description: String
