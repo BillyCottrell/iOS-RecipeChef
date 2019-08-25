@@ -11,14 +11,16 @@
 This is an iOS variant of my android app
 [Recipe-Chef](https://github.com/BillyCottrell/Recipe-Chef).
 You can't really add recipes yet but in the future it will be made possible.
-At this moment you can look in the list for recipes choose a recipe and view its details but no ingredients
-or preparationMethods can be shown yet.
+At this moment you can look in the list for recipes choose a recipe and view its details and view ingredients
+or preparationMethods. Add Recipes button work but only shows an empty pane with a top bar with the title "Add recipe (WIP)" and a button to return back. 
+
+All of these features where build without using the interface builder, everything was build programmatically combined with a custom Menu Bar and Navigation system.
 
 ## Features
 
 - [x] View Recipes
-- [ ] View Ingredients
-- [ ] View Preparation Method
+- [x] View Ingredients
+- [x] View Preparation Method
 - [ ] Add Recipes
 - [ ] Like Recipes
 - [ ] Share Recipes
