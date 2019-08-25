@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PreparationMethodCell: BaseTableViewCell {
+class PreparationMethodCell: BaseCollectionViewCell {
     
     var preparationMethod: String? {
         didSet {

@@ -11,7 +11,6 @@
 		232E705721F3569E0039EE4A /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232E705621F3569E0039EE4A /* Ingredient.swift */; };
 		232E705C21F3697E0039EE4A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232E705B21F3697E0039EE4A /* Constants.swift */; };
 		232E706521F3C4620039EE4A /* RecipeDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232E706421F3C4620039EE4A /* RecipeDetailController.swift */; };
-		234EF0C62311B24F00891FDF /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234EF0C52311B24F00891FDF /* BaseTableViewCell.swift */; };
 		234EF0C82311B30A00891FDF /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234EF0C72311B30A00891FDF /* IngredientCell.swift */; };
 		234EF0CA2311B5CC00891FDF /* PreparationMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234EF0C92311B5CC00891FDF /* PreparationMethodCell.swift */; };
 		235C4EC321B664B100B1C16E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235C4EC221B664B100B1C16E /* AppDelegate.swift */; };
@@ -40,7 +39,6 @@
 		232E705621F3569E0039EE4A /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		232E705B21F3697E0039EE4A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = RecipeChef/Constants/Constants.swift; sourceTree = SOURCE_ROOT; };
 		232E706421F3C4620039EE4A /* RecipeDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailController.swift; sourceTree = "<group>"; };
-		234EF0C52311B24F00891FDF /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		234EF0C72311B30A00891FDF /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		234EF0C92311B5CC00891FDF /* PreparationMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparationMethodCell.swift; sourceTree = "<group>"; };
 		235C4EBF21B664B100B1C16E /* RecipeChef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeChef.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,7 +168,6 @@
 				23F7341B22FD76E0009EC20C /* FeedCell.swift */,
 				23F7341D22FD84D4009EC20C /* MyRecipesCell.swift */,
 				23F9FE8F230EA1B400EDF0B4 /* MyRecipesMenuCell.swift */,
-				234EF0C52311B24F00891FDF /* BaseTableViewCell.swift */,
 				234EF0C72311B30A00891FDF /* IngredientCell.swift */,
 				234EF0C92311B5CC00891FDF /* PreparationMethodCell.swift */,
 			);
@@ -334,7 +331,6 @@
 				23FC904823016A2D004AE0B4 /* RecipeLauncher.swift in Sources */,
 				23F7341A22FD623A009EC20C /* ApiService.swift in Sources */,
 				232E705721F3569E0039EE4A /* Ingredient.swift in Sources */,
-				234EF0C62311B24F00891FDF /* BaseTableViewCell.swift in Sources */,
 				23F9FE92230EBB4300EDF0B4 /* AddRecipeLauncher.swift in Sources */,
 				232E706521F3C4620039EE4A /* RecipeDetailController.swift in Sources */,
 				23F9FE90230EA1B400EDF0B4 /* MyRecipesMenuCell.swift in Sources */,

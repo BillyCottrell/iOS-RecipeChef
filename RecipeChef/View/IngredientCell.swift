@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IngredientCell: BaseTableViewCell {
+class IngredientCell: BaseCollectionViewCell {
     var ingredient: Ingredient? {
         didSet {
             var ing = ""
